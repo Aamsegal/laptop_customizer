@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Summary from './Summary/Summary';
 import Features from './Features/Features';
+import Total from './Total/Total'
+import Header from './Header/Header'
 import './App.css';
 
 class App extends Component {
@@ -38,15 +40,11 @@ class App extends Component {
 
   render() {
     const total = Object.keys(this.state.selected)
-          .reduce((acc, curr) => acc + this.state.selected[curr].cost, 0);   
+          .reduce((acc, cur) => acc + this.state.selected[cur].cost, 0);   
 
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing</h1>
-          <h3>Laptops</h3>
-          <h5>Customize your laptop</h5>  
-        </header>      
+        <Header />     
         <main>
           <section className="main__form">
             <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
@@ -56,15 +54,8 @@ class App extends Component {
             handleUpdate={(key, item)=>this.updateFeature(key, item)} />
           </section>
           <section className="main__summary">
-            <h3>NEW GREENLEAF 2018</h3>
             <Summary selected={this.state.selected} />
-            <div className="summary__total">
-              <div className="summary__total__label">Your Price: </div>
-              <div className="summary__total__value">
-              { new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                  .format(total) }
-              </div>
-            </div>
+            <Total selected={this.state.selected} />
           </section>
         </main>
       </div>
